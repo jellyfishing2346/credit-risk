@@ -19,7 +19,7 @@ from sqlalchemy.engine import Engine
 
 from credit_risk.data.schema import metadata
 
-RAW_DATA_DIR = Path(__file__).parents[4] / "data" / "raw"
+RAW_DATA_DIR = Path(__file__).parents[3] / "data" / "raw"
 
 # Map CSV filename → (table_name, load_mode)
 # "replace" for the first file that owns the table; "append" for subsequent ones.

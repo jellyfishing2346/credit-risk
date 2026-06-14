@@ -1,4 +1,4 @@
-.PHONY: install install-dev lint format test setup-db download ingest leakage-check
+.PHONY: install install-dev lint format test setup-db download ingest leakage-check train train-tune mlflow-ui
 
 install:
 	uv sync
@@ -29,3 +29,12 @@ leakage-check:
 	import pandas as pd; \
 	from credit_risk.data.leakage import report_leakage; \
 	report_leakage(pd.read_csv('data/raw/application_train.csv'))"
+
+train:
+	uv run python -m credit_risk.models.train
+
+train-tune:
+	uv run python -m credit_risk.models.train --tune
+
+mlflow-ui:
+	uv run mlflow ui

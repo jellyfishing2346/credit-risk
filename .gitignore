@@ -10,9 +10,12 @@ dist/
 data/raw/*.csv
 data/raw/*.zip
 data/processed/
+# Allow the column descriptions file (small, useful reference)
+!data/raw/HomeCredit_columns_description.csv
 
 # MLflow experiment store
 mlruns/
+mlruns.db
 
 # Environment secrets
 .env
