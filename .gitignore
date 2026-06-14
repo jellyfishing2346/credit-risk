@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.uv/
+dist/
+
+# Data — Kaggle CSVs are large; download locally, never commit
+data/raw/*.csv
+data/raw/*.zip
+data/processed/
+
+# MLflow experiment store
+mlruns/
+
+# Environment secrets
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Coverage
+.coverage
+htmlcov/
+
+# macOS
+.DS_Store
