@@ -1,4 +1,4 @@
-.PHONY: install install-dev lint format test setup-db download ingest leakage-check train train-tune mlflow-ui explain
+.PHONY: install install-dev lint format test setup-db download ingest leakage-check train train-tune mlflow-ui explain serve
 
 install:
 	uv sync
@@ -41,3 +41,6 @@ mlflow-ui:
 
 explain:
 	uv run python -m credit_risk.explain.shap_explain
+
+serve:
+	uv run uvicorn credit_risk.api.main:app --reload --port 8000

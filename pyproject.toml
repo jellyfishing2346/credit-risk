@@ -34,6 +34,7 @@ dev = [
     "pytest-cov>=5.0",
     "ruff>=0.4",
     "ipykernel>=6.29",
+    "httpx2>=0.28",
 ]
 
 [build-system]

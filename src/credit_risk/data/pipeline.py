@@ -141,12 +141,18 @@ class CreditRiskPreprocessor(BaseEstimator, TransformerMixin):
             remainder="drop",
         )
         self._ct.fit(X)
+        # Store the column order seen at fit time so inference-time DataFrames
+        # (which may be missing auxiliary columns) can be realigned before transform.
+        self._fitted_columns_: list[str] = X.columns.tolist()
         return self
 
     def transform(self, X: pd.DataFrame) -> np.ndarray:
         X = X.drop(columns=list(_ID_COLS & set(X.columns)), errors="ignore")
         X = self._sentinel.transform(X)
         X = self._dropper.transform(X)
+        # Realign: add any columns the CT expects but are absent (filled with NaN),
+        # drop any extras that appeared post-fit (e.g. columns added only in test data).
+        X = X.reindex(columns=self._fitted_columns_, fill_value=np.nan)
         return self._ct.transform(X)
 
     def get_feature_names_out(self) -> list[str]:
