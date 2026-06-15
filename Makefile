@@ -53,6 +53,9 @@ explain:
 serve:
 	uv run uvicorn credit_risk.api.main:app --reload --port 8000
 
+dashboard:
+	uv run --extra dashboard streamlit run dashboard/app.py
+
 export-model:
 	uv run python scripts/export_model.py
 
