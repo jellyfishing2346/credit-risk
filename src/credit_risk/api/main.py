@@ -24,7 +24,11 @@ _store = ModelStore()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    _store.load()
+    from pathlib import Path
+    if Path("model_artifacts/model.json").exists():
+        _store.load_from_path("model_artifacts")
+    else:
+        _store.load()
     yield
 
 

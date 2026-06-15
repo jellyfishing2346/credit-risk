@@ -1,0 +1,27 @@
+# Heavy data files — never needed in the image
+data/
+mlruns/
+mlruns.db
+
+# Dev environment
+.venv/
+.uv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Tests and dev tooling
+tests/
+scripts/
+notebooks/
+
+# Git
+.git/
+.gitignore
+
+# Secrets and local config
+.env
+*.kaggle
+
+# Docs
+*.md

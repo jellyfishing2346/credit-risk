@@ -20,16 +20,12 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import cloudpickle
-import mlflow
-import mlflow.xgboost
 import numpy as np
 import pandas as pd
 import xgboost as xgb
 
-from credit_risk.models.train import EXPERIMENT_NAME
-
 _TRACKING_URI = "sqlite:///mlruns.db"
+_EXPERIMENT_NAME = "credit-risk-xgboost"
 
 
 def _sigmoid(x: np.ndarray) -> np.ndarray:
@@ -99,13 +95,19 @@ def explain_application(
 
 def load_artifacts(
     run_id: str | None = None,
-    experiment_name: str = EXPERIMENT_NAME,
+    experiment_name: str = _EXPERIMENT_NAME,
 ) -> tuple[xgb.XGBClassifier, object, list[str]]:
     """
     Load model + preprocessor from MLflow and return (model, preprocessor, feature_names).
 
     If run_id is None, the most recent run in the experiment is used.
+    mlflow is imported lazily so this module can be imported in the container
+    (which has no mlflow) without failing at import time.
     """
+    import cloudpickle
+    import mlflow
+    import mlflow.xgboost
+
     mlflow.set_tracking_uri(_TRACKING_URI)
 
     if run_id is None:

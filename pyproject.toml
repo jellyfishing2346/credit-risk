@@ -15,6 +15,9 @@ dependencies = [
     "xgboost>=2.0",
     "mlflow>=2.14",
     "optuna>=3.0",
+    # API serving (Phase 4-5)
+    "mangum>=0.17",
+    "cloudpickle>=3.0",
 ]
 
 [project.optional-dependencies]

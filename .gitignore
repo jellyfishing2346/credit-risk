@@ -28,5 +28,8 @@ mlruns.db
 .coverage
 htmlcov/
 
+# Baked model artefacts — export with `make export-model`, never commit
+model_artifacts/
+
 # macOS
 .DS_Store

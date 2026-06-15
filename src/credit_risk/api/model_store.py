@@ -37,11 +37,26 @@ class ModelStore:
         return self._run_id
 
     def load(self, run_id: str | None = None) -> None:
+        """Load model + preprocessor from MLflow (local dev path)."""
         print("Loading model and preprocessor from MLflow...")
         self._model, self._preprocessor, self._feature_names = load_artifacts(run_id)
-        # Capture the actual run ID used (may differ from arg if we used latest)
         self._run_id = run_id or self._run_id
         print(f"Model ready — {len(self._feature_names)} features")
+
+    def load_from_path(self, path: str = "model_artifacts") -> None:
+        """Load baked model + preprocessor from a local directory (container path)."""
+        import cloudpickle
+        from pathlib import Path
+        p = Path(path)
+        print(f"Loading model from {p}/...")
+        self._model = xgb.XGBClassifier()
+        self._model.load_model(str(p / "model.json"))
+        with open(p / "preprocessor.pkl", "rb") as f:
+            self._preprocessor = cloudpickle.load(f)
+        self._feature_names = self._preprocessor.get_feature_names_out()
+        run_id_file = p / "run_id.txt"
+        self._run_id = run_id_file.read_text().strip() if run_id_file.exists() else "baked"
+        print(f"Model ready — {len(self._feature_names)} features (run: {self._run_id})")
 
     def predict(self, request: ScoreRequest, top_n: int = 10) -> ScoreResponse:
         # Build a one-row DataFrame from the request
