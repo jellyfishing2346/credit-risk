@@ -9,7 +9,10 @@ Usage (from project root):
 from __future__ import annotations
 
 import argparse
+import tempfile
+from pathlib import Path
 
+import cloudpickle
 import mlflow
 import mlflow.xgboost
 import numpy as np
@@ -161,6 +164,13 @@ def run_training(tune: bool = False, n_trials: int = 30) -> tuple[xgb.XGBClassif
         metrics = {**val_metrics, **test_metrics}
         mlflow.log_metrics(metrics)
         mlflow.xgboost.log_model(model, name="model")
+
+        # Persist preprocessor so the explain module can load it without retraining
+        with tempfile.TemporaryDirectory() as tmp:
+            pkl_path = Path(tmp) / "preprocessor.pkl"
+            with open(pkl_path, "wb") as f:
+                cloudpickle.dump(preprocessor, f)
+            mlflow.log_artifact(str(pkl_path), artifact_path="preprocessor")
 
         run_id = run.info.run_id
 

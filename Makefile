@@ -1,4 +1,4 @@
-.PHONY: install install-dev lint format test setup-db download ingest leakage-check train train-tune mlflow-ui
+.PHONY: install install-dev lint format test setup-db download ingest leakage-check train train-tune mlflow-ui explain
 
 install:
 	uv sync
@@ -38,3 +38,6 @@ train-tune:
 
 mlflow-ui:
 	uv run mlflow ui
+
+explain:
+	uv run python -m credit_risk.explain.shap_explain
