@@ -39,47 +39,47 @@ Most ML tutorials stop at model training. This project goes further — from raw
 ┌─────────────────────────────────────────────────────────────────────┐
 │                        Data Layer (Phase 1)                         │
 │                                                                     │
-│  Kaggle CSVs  ──►  PostgreSQL Schema  ──►  Leakage Checks          │
+│  Kaggle CSVs  ──►  PostgreSQL Schema  ──►  Leakage Checks           │
 │  (8 tables)         (SQLAlchemy Core)       (pattern + correlation) │
 └────────────────────────────┬────────────────────────────────────────┘
                              │
 ┌────────────────────────────▼────────────────────────────────────────┐
 │                    Feature Engineering (Phase 2)                    │
 │                                                                     │
-│  Bureau · Previous Apps · Installments · POS Cash · Credit Cards   │
-│  ──► 12–9 aggregations each ──► Domain ratios + EXT_SOURCE         │
+│  Bureau · Previous Apps · Installments · POS Cash · Credit Cards    │
+│  ──► 12–9 aggregations each ──► Domain ratios + EXT_SOURCE          │
 │                                  interactions ──► 176 features      │
 └────────────────────────────┬────────────────────────────────────────┘
                              │
 ┌────────────────────────────▼────────────────────────────────────────┐
 │                      Model Training (Phase 2)                       │
 │                                                                     │
-│  XGBoost  +  Optuna HPO (30 trials)  +  MLflow tracking            │
-│  Stratified 60/20/20 split  ·  scale_pos_weight for imbalance      │
-│  Early stopping (50 rounds)  ·  SQLite artifact store              │
+│  XGBoost  +  Optuna HPO (30 trials)  +  MLflow tracking             │
+│  Stratified 60/20/20 split  ·  scale_pos_weight for imbalance       │
+│  Early stopping (50 rounds)  ·  SQLite artifact store               │
 └────────────────────────────┬────────────────────────────────────────┘
                              │
 ┌────────────────────────────▼────────────────────────────────────────┐
 │                    Explainability (Phase 3)                         │
 │                                                                     │
-│  XGBoost native TreeSHAP (pred_contribs=True)                      │
-│  Global importance  ·  Per-application top-N drivers               │
+│  XGBoost native TreeSHAP (pred_contribs=True)                       │
+│  Global importance  ·  Per-application top-N drivers                │
 │  No shap/llvmlite dependency — same algorithm, zero overhead        │
 └────────────────────────────┬────────────────────────────────────────┘
                              │
 ┌────────────────────────────▼────────────────────────────────────────┐
 │                       REST API (Phase 4)                            │
 │                                                                     │
-│  FastAPI  ·  POST /score  ──►  probability + risk band + SHAP      │
-│  GET /health  ·  Pydantic v2 validation  ·  <35ms warm latency     │
+│  FastAPI  ·  POST /score  ──►  probability + risk band + SHAP       │
+│  GET /health  ·  Pydantic v2 validation  ·  <35ms warm latency      │
 └───────────────┬─────────────────────────────┬───────────────────────┘
                 │                             │
 ┌───────────────▼───────────┐   ┌────────────▼──────────────────────┐
 │   Deployment (Phase 5)    │   │        Dashboard                  │
 │                           │   │                                   │
 │  Docker container image   │   │  Streamlit · probability gauge    │
-│  Model baked in at build  │   │  SHAP waterfall chart            │
-│  Google Cloud Run         │   │  Live API calls                  │
+│  Model baked in at build  │   │  SHAP waterfall chart             │
+│  Google Cloud Run         │   │  Live API calls                   │
 │  Mangum Lambda adapter    │   │                                   │
 └───────────────────────────┘   └───────────────────────────────────┘
 ```
