@@ -1,5 +1,4 @@
 import numpy as np
-import pytest
 
 from credit_risk.data.pipeline import (
     DAYS_EMPLOYED_SENTINEL,
@@ -7,7 +6,6 @@ from credit_risk.data.pipeline import (
     HighMissingnessDropper,
     SentinelReplacer,
 )
-
 
 # ---------------------------------------------------------------------------
 # SentinelReplacer

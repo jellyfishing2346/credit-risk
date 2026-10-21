@@ -46,7 +46,10 @@ class ScoreRequest(BaseModel):
     amt_annuity: float | None = None
     amt_goods_price: float | None = None
     days_birth: int | None = Field(default=None, description="Days before application (negative)")
-    days_employed: int | None = Field(default=None, description="Days before application (negative); 365243 = never employed")
+    days_employed: int | None = Field(
+        default=None,
+        description="Days before application (negative); 365243 = never employed",
+    )
     code_gender: str | None = Field(default=None, description="M or F")
     flag_own_car: str | None = Field(default=None, description="Y or N")
     flag_own_realty: str | None = Field(default=None, description="Y or N")
@@ -67,7 +70,9 @@ class ScoreRequest(BaseModel):
 
 class ShapDriver(BaseModel):
     feature: str
-    shap_value: float = Field(description="Contribution to log-odds (positive = increases default risk)")
+    shap_value: float = Field(
+        description="Contribution to log-odds (positive = increases default risk)"
+    )
     direction: str = Field(description="INCREASES_RISK or DECREASES_RISK")
 
 

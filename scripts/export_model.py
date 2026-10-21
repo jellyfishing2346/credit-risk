@@ -14,10 +14,8 @@ import argparse
 import shutil
 from pathlib import Path
 
-import cloudpickle
 import mlflow
 import mlflow.xgboost
-import xgboost as xgb
 
 TRACKING_URI = "sqlite:///mlruns.db"
 EXPERIMENT_NAME = "credit-risk-xgboost"
@@ -58,7 +56,7 @@ def export(run_id: str | None = None) -> None:
     # Record which run was baked in for traceability
     (OUTPUT_DIR / "run_id.txt").write_text(run_id)
     print(f"  run_id    → {OUTPUT_DIR}/run_id.txt")
-    print(f"Done — model_artifacts/ ready for 'make docker-build'")
+    print("Done — model_artifacts/ ready for 'make docker-build'")
 
 
 if __name__ == "__main__":

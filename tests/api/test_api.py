@@ -5,7 +5,6 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock, patch
 
-import numpy as np
 import pytest
 from fastapi.testclient import TestClient
 
@@ -16,7 +15,6 @@ from credit_risk.api.schemas import (
     ShapExplanation,
     classify_risk,
 )
-
 
 # ---------------------------------------------------------------------------
 # classify_risk
@@ -53,8 +51,12 @@ def _make_mock_store(prob: float = 0.12):
         model_run_id="test-run-abc123",
         shap_explanation=ShapExplanation(
             top_drivers=[
-                ShapDriver(feature="num__ext_source_2", shap_value=-0.5, direction="DECREASES_RISK"),
-                ShapDriver(feature="num__inst_days_late_mean", shap_value=0.3, direction="INCREASES_RISK"),
+                ShapDriver(
+                    feature="num__ext_source_2", shap_value=-0.5, direction="DECREASES_RISK"
+                ),
+                ShapDriver(
+                    feature="num__inst_days_late_mean", shap_value=0.3, direction="INCREASES_RISK"
+                ),
             ]
         ),
         latency_ms=None,
@@ -64,7 +66,7 @@ def _make_mock_store(prob: float = 0.12):
 
 @pytest.fixture
 def client():
-    from credit_risk.api.main import app, _store
+    from credit_risk.api.main import app
     mock = _make_mock_store()
     with patch("credit_risk.api.main._store", mock):
         with TestClient(app, raise_server_exceptions=True) as c:

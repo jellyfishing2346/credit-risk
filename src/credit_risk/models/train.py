@@ -136,7 +136,8 @@ def run_training(tune: bool = False, n_trials: int = 30) -> tuple[xgb.XGBClassif
     neg, pos = (y_train == 0).sum(), (y_train == 1).sum()
     print(
         f"Train {len(X_train):,}  Val {len(X_val):,}  Test {len(X_test):,}"
-        f"  |  default rate: train {y_train.mean():.3%}  val {y_val.mean():.3%}  test {y_test.mean():.3%}"
+        f"  |  default rate: train {y_train.mean():.3%}  val {y_val.mean():.3%}"
+        f"  test {y_test.mean():.3%}"
     )
 
     params = {**_BASE_PARAMS, "scale_pos_weight": neg / pos}

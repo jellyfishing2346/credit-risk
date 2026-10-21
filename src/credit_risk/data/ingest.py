@@ -14,7 +14,7 @@ import zipfile
 from pathlib import Path
 
 import pandas as pd
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
 
 from credit_risk.data.schema import metadata

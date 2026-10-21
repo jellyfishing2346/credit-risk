@@ -4,7 +4,6 @@ Tests for SHAP explainability functions.
 Uses a tiny synthetic XGBoost model — no real data or MLflow needed.
 """
 import numpy as np
-import pandas as pd
 import pytest
 import xgboost as xgb
 

@@ -131,7 +131,6 @@ def add_domain_features(X: pd.DataFrame) -> pd.DataFrame:
     Domain ratios encode credit-to-income stress, which is the core underwriting signal.
     """
     X = X.copy()
-    cols = X.columns.str.lower()
 
     # EXT_SOURCE interactions
     e1 = X.get("ext_source_1", X.get("EXT_SOURCE_1"))
