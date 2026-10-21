@@ -26,6 +26,9 @@ dependencies = [
 # Requires Python <3.13 due to llvmlite's ceiling
 explainability = [
     "shap>=0.45",
+    # shap needs numba; without a floor the resolver picks numba 0.53.1
+    # (2021), which has no wheels for Python 3.12+ and fails to build
+    "numba>=0.60",
 ]
 # Phase 4 — install with: uv sync --extra api
 api = [
