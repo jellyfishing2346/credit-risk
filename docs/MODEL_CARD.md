@@ -13,7 +13,7 @@ This model card follows the framework proposed by Mitchell et al. (2019) and is 
 | Training date | June 2026 |
 | Framework | XGBoost 2.0+, scikit-learn 1.5+ |
 | MLflow run ID | `91a4f51bd49c46b397134a77d9482dfa` |
-| License | MIT |
+| License | Apache 2.0 |
 | Author | Faizan Khan |
 
 ### Architecture

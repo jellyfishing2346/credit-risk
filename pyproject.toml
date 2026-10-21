@@ -3,6 +3,7 @@ name = "credit-risk"
 version = "0.1.0"
 description = "Credit Risk Scoring Engine — Home Credit Default Risk"
 requires-python = ">=3.12"
+license = "Apache-2.0"
 dependencies = [
     # Data layer (Phase 1)
     "pandas>=2.2",
