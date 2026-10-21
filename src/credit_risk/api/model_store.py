@@ -45,8 +45,9 @@ class ModelStore:
 
     def load_from_path(self, path: str = "model_artifacts") -> None:
         """Load baked model + preprocessor from a local directory (container path)."""
-        import cloudpickle
         from pathlib import Path
+
+        import cloudpickle
         p = Path(path)
         print(f"Loading model from {p}/...")
         self._model = xgb.XGBClassifier()

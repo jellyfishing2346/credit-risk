@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      # shap (explainability extra) doesn't support 3.13 yet; this overrides
+      # .python-version so every uv command uses the same environment
+      UV_PYTHON: "3.12"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Install dependencies (locked)
+        run: uv sync --locked --extra api --extra explainability --extra dev
+
+      - name: Lint
+        run: uv run --no-sync ruff check .
+
+      - name: Run tests
+        run: uv run --no-sync pytest -q

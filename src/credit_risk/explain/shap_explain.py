@@ -11,7 +11,9 @@ Two levels of explanation:
               score?" — the key output for Phase 4's API /explain endpoint.
 
 Usage:
-    from credit_risk.explain.shap_explain import load_artifacts, global_importance, explain_application
+    from credit_risk.explain.shap_explain import (
+        explain_application, global_importance, load_artifacts,
+    )
 
     model, preprocessor, feature_names = load_artifacts(run_id="<mlflow-run-id>")
     # or omit run_id to use the latest run in the default experiment

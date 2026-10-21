@@ -1,5 +1,4 @@
 import numpy as np
-import pytest
 
 from credit_risk.data.pipeline import CreditRiskPreprocessor
 from credit_risk.models.train import split_data

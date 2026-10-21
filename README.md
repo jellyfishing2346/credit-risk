@@ -7,7 +7,7 @@
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.111+-009688?style=for-the-badge&logo=fastapi&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Google Cloud](https://img.shields.io/badge/Google_Cloud_Run-Deployed-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![License](https://img.shields.io/badge/License-Apache_2.0-blue?style=for-the-badge)
 
 **A production-grade credit risk scoring system built on the Home Credit Default Risk dataset.**
 Score loan applications in real time, with per-decision SHAP explanations of every prediction.
@@ -421,4 +421,4 @@ The training pipeline (`make train`) loads directly from CSVs in `data/raw/`. Po
 
 ## License
 
-[MIT](LICENSE) © 2026 Faizan Khan
+[Apache 2.0](LICENSE) © 2026 Faizan Khan
